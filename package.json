@@ -1,0 +1,15 @@
+{
+  "name": "@bnb-chain/ask-ai-mcp",
+  "version": "1.0.0",
+  "description": "BNBChain AI Knowledge Base MCP – semantic search over BNB Chain docs, BEPs, blogs, and announcements",
+  "keywords": ["bnbchain", "mcp", "ai", "knowledge-base", "blockchain", "web3"],
+  "homepage": "https://github.com/bnb-chain/ask-ai-mcp#readme",
+  "bugs": { "url": "https://github.com/bnb-chain/ask-ai-mcp/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/bnb-chain/ask-ai-mcp.git" },
+  "license": "MIT",
+  "bin": {
+    "ask-ai-mcp": "./bin/index.js"
+  },
+  "files": ["bin/", "skills/", "README.md"],
+  "engines": { "node": ">=18" }
+}

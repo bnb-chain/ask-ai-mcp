@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ask-ai-mcp": {
+      "type": "sse",
+      "url": "https://api.superintern.ai/agent/async/mcp/mcp"
+    }
+  }
+}
