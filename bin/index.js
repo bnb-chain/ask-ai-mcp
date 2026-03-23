@@ -51,8 +51,20 @@ function copySkills(targetDir) {
 function upsertMcpConfig(settingsPath) {
   let settings = {};
   if (fs.existsSync(settingsPath)) {
-    try { settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8')); }
-    catch { /* leave empty */ }
+    try {
+      settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    } catch (e) {
+      console.error(`Error: ${settingsPath} contains invalid JSON and cannot be modified safely.`);
+      console.error('Please fix or remove the file and re-run the installer.');
+      process.exit(1);
+    }
+    if (settings.mcpServers && settings.mcpServers['ask-ai-mcp']) {
+      console.log(`⚠️  ask-ai-mcp is already configured in ${settingsPath} — skipping to preserve your existing entry.`);
+      return;
+    }
+    // Back up before modifying
+    fs.copyFileSync(settingsPath, settingsPath + '.bak');
+    console.log(`   Backup saved to ${settingsPath}.bak`);
   }
   settings.mcpServers = settings.mcpServers || {};
   Object.assign(settings.mcpServers, MCP_CONFIG);
@@ -63,7 +75,7 @@ function upsertMcpConfig(settingsPath) {
 function skillsAdd(global) {
   const base = global ? path.join(os.homedir(), '.claude') : path.join(process.cwd(), '.claude');
   const skillsDir = path.join(base, 'skills');
-  const settingsPath = path.join(base, global ? 'settings.json' : 'settings.json');
+  const settingsPath = path.join(base, global ? 'settings.json' : 'settings.local.json');
 
   console.log(`\n📦 Installing BNBChain AI skills...`);
 

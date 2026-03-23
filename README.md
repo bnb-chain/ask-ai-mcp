@@ -148,8 +148,11 @@ Combine with [bnbchain-mcp](https://github.com/bnb-chain/bnbchain-mcp) for a ful
 Agent: "Research the current BNB staking APR, then stake 1 BNB."
 
 → ask-ai-mcp:    ask_bnbchain("What is the current BSC staking APR?")
+→ [present findings to user and wait for explicit confirmation]
 → bnbchain-mcp:  stake({ amount: "1", validator: "..." })
 ```
+
+> **Security note:** Always confirm transaction details with the user before executing on-chain actions. Never automatically chain knowledge base results into state-changing operations without an explicit human confirmation step.
 
 ### 3. Smart Contract Development
 
